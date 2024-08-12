@@ -15,9 +15,9 @@ WORKDIR /source
 
 RUN npm install && npx tsc
 
-COPY release/*.* /app
+COPY /source/release/*.* /app
 
-COPY package.json /app/package.json
+COPY /source/package.json /app/package.json
 
 WORKDIR /app
 
