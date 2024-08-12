@@ -9,19 +9,17 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositorie
 
 RUN npm config set registry https://mirrors.cloud.tencent.com/npm/
 
-COPY . /source
-
 WORKDIR /source
 
-RUN npm install
+COPY . /source
 
-RUN npx tsc
-
-COPY /source/release/*.* /app
-
-COPY /source/package.json /app/package.json
+RUN npm install &&　npx tsc
 
 WORKDIR /app
+
+RUN cp -r /source/release/* /app/
+
+RUN cp /source/package.json /app/
 
 RUN npm install
 
