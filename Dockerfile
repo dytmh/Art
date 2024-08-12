@@ -13,7 +13,9 @@ COPY . /source
 
 WORKDIR /source
 
-RUN npm install && npx tsc
+RUN npm install
+
+RUN npx tsc
 
 COPY /source/release/*.* /app
 
