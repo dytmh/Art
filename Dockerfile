@@ -13,7 +13,7 @@ WORKDIR /source
 
 COPY . /source
 
-RUN npm install && npm i npx -g &&　npx tsc
+RUN npm install && npx tsc
 
 WORKDIR /app
 
