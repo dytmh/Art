@@ -13,13 +13,20 @@ namespace userApi
     }
 
     export const login: HandleHttpApi = async (req, res) => {
-        console.log(req.headers)
-        console.log(req.body)
+        if (isNullOrEmpty(req.headers['x-wx-openid'])) {
+            res.send({
+                errcode: 1,
+                errmsg: '无效',
+                userid: ''
+            })
+        } else {
+            res.send({
+                errcode: 0,
+                errmsg: '',
+                userid: req.headers['x-wx-openid']
+            })
+        }
         
-        res.send({
-            errcode: 0,
-            errmsg: ''
-        })
     }
 }
 
