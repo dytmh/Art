@@ -12,7 +12,9 @@ namespace userApi
     }
 
     export const login: HandleHttpApi = async (req, res) => {
-        const wxRes = await axios.get('https://api.weixin.qq.com/sns/jscode2session', {
+        const wxRes = await axios.request({
+            url: 'https://api.weixin.qq.com/sns/jscode2session',
+            method: 'GET',
             responseType: 'json',
             params: {
                 'appid': GlobalConfig.AppId,
