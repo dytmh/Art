@@ -13,6 +13,8 @@ namespace userApi
     }
 
     export const login: HandleHttpApi = async (req, res) => {
+        console.log(req.headers)
+
         const wxRes = await axios.request({
             url: 'https://api.weixin.qq.com/sns/jscode2session',
             method: 'GET',
