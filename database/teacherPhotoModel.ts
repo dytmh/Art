@@ -2,21 +2,29 @@ import { DataTypes, Model } from "sequelize";
 import ModelSequelize from "./modelSequelize";
 
 
-class SchoolModel extends Model {
+class TeacherPhotoModel extends Model {
     static register() {
-        SchoolModel.init({
-            school_id: {
+        TeacherPhotoModel.init({
+            id: {
                 type: DataTypes.UUID,
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
+            },
+            teacher_id: {
+                type: DataTypes.STRING,
+                allowNull: false
             },
             name: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
-            address: {
+            desc: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: true
+            },
+            url: {
+                type: DataTypes.STRING,
+                allowNull: true
             },
             createtime: {
                 type: DataTypes.DATE,
@@ -27,19 +35,14 @@ class SchoolModel extends Model {
                 type: DataTypes.DATE,
                 defaultValue: DataTypes.NOW,
                 allowNull: false
-            },
-            sort: {
-                type: DataTypes.INTEGER,
-                defaultValue: 0,
-                allowNull: false
             }
           }, { 
             sequelize: ModelSequelize.getSequelize(),
-            modelName: 't_school',
-            indexes: [{ name: 'index', unique: false, fields: ['name', 'sort'] }]
+            modelName: 't_teacher_photo',
+            indexes: [{ name: 'index', unique: false, fields: ['name', 'createtime', 'updatetime', 'teacher_id'] }]
         });
-        SchoolModel.sync({alter: true})
+        TeacherPhotoModel.sync({alter: true})
     }
 }
 
-export default SchoolModel
+export default TeacherPhotoModel
