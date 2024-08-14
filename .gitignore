@@ -1,5 +1,6 @@
 .vs
 .git
+.idea
 package-lock.json
 node_modules
 release
