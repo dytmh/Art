@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
 import router from './router'
+import { registerModels } from './database/registerModels';
 
 const logger = morgan("tiny");
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(logger);
 app.use(router)
 
-const port = process.env.PORT || 80;
+registerModels()
 
+const port = process.env.PORT || 80;
 app.listen(port, () => console.log('Express server is running...' +　port))
