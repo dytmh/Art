@@ -21,10 +21,12 @@ class TeacherModel extends Model {
             }
           }, { 
             sequelize: ModelSequelize.getSequelize(),
-            modelName: 't_teacher',
+            modelName: 't_teachers',
+            createdAt: 'createtime',
+            updatedAt: 'updatetime',
             indexes: [{ name: 'index', unique: false, fields: ['name', 'createtime'] }]
         });
-        TeacherModel.sync({alter: true})
+        TeacherModel.sync({alter: true}).catch(() => {})
     }
 }
 

@@ -29,10 +29,12 @@ class UserModel extends Model {
             }
           }, { 
             sequelize: ModelSequelize.getSequelize(),
-            modelName: 't_user',
+            modelName: 't_users',
+            createdAt: 'createtime',
+            updatedAt: 'updatetime',
             indexes: [{ name: 'index', unique: false, fields: ['name', 'sort'] }]
         });
-        UserModel.sync({alter: true})
+        UserModel.sync({alter: true}).catch(() => {})
     }
 }
 

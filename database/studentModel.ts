@@ -21,10 +21,12 @@ class StudentModel extends Model {
             }
           }, { 
             sequelize: ModelSequelize.getSequelize(),
-            modelName: 't_student',
+            modelName: 't_students',
+            createdAt: 'createtime',
+            updatedAt: 'updatetime',
             indexes: [{ name: 'index', unique: false, fields: ['name', 'createtime'] }]
         });
-        StudentModel.sync({alter: true})
+        StudentModel.sync({alter: true}).catch(() => {})
     }
 }
 

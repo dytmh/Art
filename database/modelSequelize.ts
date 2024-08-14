@@ -8,7 +8,7 @@ class ModelSequelize {
 
     static getSequelize(): Sequelize {
         if (!ModelSequelize._sequelize) {
-            ModelSequelize._sequelize = new Sequelize("nodejs_demo", MYSQL_USERNAME!, MYSQL_PASSWORD, {
+            ModelSequelize._sequelize = new Sequelize("art", MYSQL_USERNAME!, MYSQL_PASSWORD, {
             host,
             port : Number.parseInt(port),
             dialect: "mysql",

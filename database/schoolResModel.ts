@@ -30,9 +30,11 @@ class SchoolResModel extends Model {
           }, { 
             sequelize: ModelSequelize.getSequelize(),
             modelName: 't_school_res',
+            createdAt: 'createtime',
+            updatedAt: 'updatetime',
             indexes: [{ name: 'index', unique: false, fields: ['school_id', 'sort'] }]
         });
-        SchoolResModel.sync({alter: true})
+        SchoolResModel.sync({alter: true}).catch(() => {})
     }
 }
 

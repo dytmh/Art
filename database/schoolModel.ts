@@ -35,10 +35,12 @@ class SchoolModel extends Model {
             }
           }, { 
             sequelize: ModelSequelize.getSequelize(),
-            modelName: 't_school',
+            modelName: 't_schools',
+            createdAt: 'createtime',
+            updatedAt: 'updatetime',
             indexes: [{ name: 'index', unique: false, fields: ['name', 'sort'] }]
         });
-        SchoolModel.sync({alter: true})
+        SchoolModel.sync({alter: true}).catch(() => {})
     }
 }
 

@@ -30,9 +30,11 @@ class TeacherPhotoResModel extends Model {
           }, { 
             sequelize: ModelSequelize.getSequelize(),
             modelName: 't_teacher_photo_res',
+            createdAt: 'createtime',
+            updatedAt: 'updatetime',
             indexes: [{ name: 'index', unique: false, fields: ['photo_id', 'sort'] }]
         });
-        TeacherPhotoResModel.sync({alter: true})
+        TeacherPhotoResModel.sync({alter: true}).catch(() => {})
     }
 }
 
