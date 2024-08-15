@@ -48,7 +48,7 @@ class UserModel extends Model {
             },
             raw: true
           })
-          return user
+          return user.dataValues
     }
 
     static async findUser(userid: string) {
