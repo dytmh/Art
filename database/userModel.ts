@@ -36,6 +36,28 @@ class UserModel extends Model {
         });
         UserModel.sync({alter: true}).catch(() => {})
     }
+
+    static async findOrCreateUser(userid: string, name: string, avatar: string) {
+        const [user, created] = await UserModel.findOrCreate({
+            where: { userid: userid },
+            defaults: {
+                userid: userid,
+                name: name,
+                avatar: avatar,
+                admin: 0
+            },
+            raw: true
+          })
+          return user
+    }
+
+    static async findUser(userid: string) {
+        const user = await UserModel.findOne({
+            where: { userid: userid },
+            raw: true
+        })
+        return user
+    }
 }
 
 export default UserModel

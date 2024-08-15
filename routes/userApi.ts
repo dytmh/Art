@@ -1,5 +1,6 @@
 import GlobalConfig from '../config/config';
-import { isNullOrEmpty } from '../utility';
+import UserModel from '../database/userModel';
+import { defined, isNullOrEmpty } from '../utility';
 import type { HandleHttpApi } from './interface'
 import axios from 'axios'
 import CryptoJS from 'crypto-js'
@@ -16,15 +17,25 @@ namespace userApi
         if (isNullOrEmpty(req.headers['x-wx-openid'])) {
             res.send({
                 errcode: 1,
-                errmsg: '无效',
+                errmsg: '无效用户',
                 userid: ''
             })
         } else {
-            res.send({
-                errcode: 0,
-                errmsg: '',
-                userid: req.headers['x-wx-openid']
-            })
+            const user = await UserModel.findOrCreateUser(req.headers['x-wx-openid'] as string, req.body['name'], req.body['avatar'])
+            if (defined(user)) {
+                res.send({
+                    errcode: 0,
+                    errmsg: '',
+                    ...user
+                })
+            } else {
+                res.send({
+                    errcode: 2,
+                    errmsg: '登陆失败',
+                    userid: ''
+                })
+            }
+            
         }
         
     }
