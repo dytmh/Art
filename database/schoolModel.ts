@@ -1,5 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import ModelSequelize from "./modelSequelize";
+import { raw } from "mysql";
 
 
 class SchoolModel extends Model {
@@ -12,7 +13,8 @@ class SchoolModel extends Model {
             },
             name: {
                 type: DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                unique: true
             },
             address: {
                 type: DataTypes.STRING,
@@ -41,6 +43,49 @@ class SchoolModel extends Model {
             indexes: [{ name: 'index', unique: false, fields: ['name', 'sort'] }]
         });
         SchoolModel.sync({alter: true}).catch(() => {})
+    }
+
+    static async getSchoolList() {
+        const data = await SchoolModel.findAll({
+            order:  ['sort', 'createtime', 'DESC'],
+            raw: true
+        })
+        return data ?? []
+    }
+
+    static async addSchool(name: string, address: string) {
+        const data = await SchoolModel.create({
+            name: name,
+            address: address,
+        },
+        {
+            raw: true
+        })
+        return data?.dataValues
+    }
+
+    static async updateSchool(school_id: string, name: string, address: string) {
+        const data = await SchoolModel.findOne({
+            where: { school_id: school_id },
+            raw: true
+        })
+        if (data) {
+            data.set({
+                name: name,
+                address: address
+            });
+            const res = await data.save()
+            return res?.dataValues
+        }
+    }
+
+    static async deleteSchool(school_id: string) {
+        const data = await SchoolModel.findOne({
+            where: { school_id: school_id }
+        })
+        if (data) {
+            await data.destroy()
+        }
     }
 }
 

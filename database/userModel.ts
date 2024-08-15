@@ -59,7 +59,7 @@ class UserModel extends Model {
             where: { userid: userid },
             raw: true
         })
-        return user?.dataValues
+        return user
     }
 }
 
