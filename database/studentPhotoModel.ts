@@ -10,10 +10,6 @@ class StudentPhotoModel extends Model {
                 defaultValue: DataTypes.UUIDV4,
                 primaryKey: true
             },
-            student_id: {
-                type: DataTypes.STRING,
-                allowNull: false
-            },
             name: {
                 type: DataTypes.STRING,
                 allowNull: false
@@ -38,7 +34,7 @@ class StudentPhotoModel extends Model {
             }
           }, { 
             sequelize: ModelSequelize.getSequelize(),
-            modelName: 't_student_photo',
+            modelName: 't_student_photos',
             createdAt: 'createtime',
             updatedAt: 'updatetime',
             indexes: [{ name: 'index', unique: false, fields: ['name', 'createtime', 'updatetime', 'student_id'] }]

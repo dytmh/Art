@@ -20,6 +20,10 @@ class SchoolModel extends Model {
                 type: DataTypes.STRING,
                 allowNull: false
             },
+            info: {
+                type: DataTypes.TEXT('long'),
+                allowNull: true
+            },
             createtime: {
                 type: DataTypes.DATE,
                 defaultValue: DataTypes.NOW,
@@ -46,46 +50,70 @@ class SchoolModel extends Model {
     }
 
     static async getSchoolList() {
-        const data = await SchoolModel.findAll({
-            order:  ['sort', 'createtime', 'DESC'],
-            raw: true
-        })
-        return data ?? []
-    }
-
-    static async addSchool(name: string, address: string) {
-        const data = await SchoolModel.create({
-            name: name,
-            address: address,
-        },
-        {
-            raw: true
-        })
-        return data?.dataValues
-    }
-
-    static async updateSchool(school_id: string, name: string, address: string) {
-        const data = await SchoolModel.findOne({
-            where: { school_id: school_id },
-            raw: true
-        })
-        if (data) {
-            data.set({
-                name: name,
-                address: address
-            });
-            const res = await data.save()
-            return res?.dataValues
+        try {
+            const data = await SchoolModel.findAll({
+                order:  ['sort', 'createtime', 'DESC'],
+                raw: true
+            })
+            return data
         }
+        catch {
+        }
+        return null
+    }
+
+    static async addSchool(name: string, address: string, info: string) {
+        try {
+            const data = await SchoolModel.create({
+                name: name,
+                address: address,
+                info: info
+            },
+            {
+                raw: true
+            })
+            return data?.dataValues
+        }
+        catch {
+        }
+        return null
+    }
+
+    static async updateSchool(school_id: string, name: string, address: string, info: string) {
+        try {
+            const data = await SchoolModel.findOne({
+                where: { school_id: school_id },
+                raw: true
+            })
+            if (data) {
+                data.set({
+                    name: name,
+                    address: address,
+                    info: info
+                });
+                const res = await data.save()
+                return res?.dataValues
+            }
+        }
+        catch {
+        }
+        return null
     }
 
     static async deleteSchool(school_id: string) {
-        const data = await SchoolModel.findOne({
-            where: { school_id: school_id }
-        })
-        if (data) {
-            await data.destroy()
+        try {
+            const data = await SchoolModel.findOne({
+                where: { school_id: school_id },
+                raw: true
+            })
+            if (data) {
+                await data.destroy()
+                return true
+            }
         }
+        catch {
+        }
+        return false
     }
 }
 
