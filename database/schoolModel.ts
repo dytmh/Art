@@ -52,7 +52,7 @@ class SchoolModel extends Model {
     static async getSchoolList() {
         try {
             const data = await SchoolModel.findAll({
-                order:  ['sort', 'createtime', 'DESC'],
+                order:  [['sort', 'DESC'], ['createtime', 'DESC']],
                 raw: true
             })
             return data
