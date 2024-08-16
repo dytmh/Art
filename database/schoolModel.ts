@@ -57,7 +57,8 @@ class SchoolModel extends Model {
             })
             return data
         }
-        catch {
+        catch(e) {
+            console.log(e)
         }
         return null
     }
@@ -74,7 +75,8 @@ class SchoolModel extends Model {
             })
             return data?.dataValues
         }
-        catch {
+        catch(e) {
+            console.log(e)
         }
         return null
     }
@@ -95,7 +97,8 @@ class SchoolModel extends Model {
                 return res?.dataValues
             }
         }
-        catch {
+        catch(e) {
+            console.log(e)
         }
         return null
     }
@@ -111,7 +114,8 @@ class SchoolModel extends Model {
                 return true
             }
         }
-        catch {
+        catch(e) {
+            console.log(e)
         }
         return false
     }
