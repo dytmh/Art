@@ -69,9 +69,6 @@ class SchoolModel extends Model {
                 name: name,
                 address: address,
                 info: info
-            },
-            {
-                raw: true
             })
             return data?.dataValues
         }
@@ -84,8 +81,7 @@ class SchoolModel extends Model {
     static async updateSchool(school_id: string, name: string, address: string, info: string) {
         try {
             const data = await SchoolModel.findOne({
-                where: { school_id: school_id },
-                raw: true
+                where: { school_id: school_id }
             })
             if (data) {
                 data.set({
@@ -106,8 +102,7 @@ class SchoolModel extends Model {
     static async deleteSchool(school_id: string) {
         try {
             const data = await SchoolModel.findOne({
-                where: { school_id: school_id },
-                raw: true
+                where: { school_id: school_id }
             })
             if (data) {
                 await data.destroy()
