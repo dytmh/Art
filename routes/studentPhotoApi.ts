@@ -10,9 +10,11 @@ namespace studentPhotoApi
     export const getStudentPhotoList: HandleHttpApi = async (req, res) => {
         const data = await StudentPhotoModel.getStudentPhotoList(req.body['page'], req.body['count'])
         if (defined(data)) {
+            const total = await StudentPhotoModel.count()
             res.send({
                 errcode: 0,
                 errmsg: '',
+                total: total,
                 data: data
             })
         } else {

@@ -10,9 +10,11 @@ namespace teacherPhotoApi
     export const getTeacherPhotoList: HandleHttpApi = async (req, res) => {
         const data = await TeacherPhotoModel.getTeacherPhotoList(req.body['page'], req.body['count'])
         if (defined(data)) {
+            const total = await TeacherPhotoModel.count()
             res.send({
                 errcode: 0,
                 errmsg: '',
+                total: total,
                 data: data
             })
         } else {
