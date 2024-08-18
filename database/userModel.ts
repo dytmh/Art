@@ -17,6 +17,10 @@ class UserModel extends Model {
                 type: DataTypes.STRING,
                 allowNull: true
             },
+            remark: {
+                type: DataTypes.STRING,
+                allowNull: true
+            },
             admin: {
                 type: DataTypes.TINYINT,
                 defaultValue: 0,
