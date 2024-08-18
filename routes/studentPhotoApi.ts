@@ -8,7 +8,7 @@ import CryptoJS from 'crypto-js'
 namespace studentPhotoApi
 {
     export const getStudentPhotoList: HandleHttpApi = async (req, res) => {
-        const data = await StudentPhotoModel.getStudentPhotoList()
+        const data = await StudentPhotoModel.getStudentPhotoList(req.body['page'], req.body['count'])
         if (defined(data)) {
             res.send({
                 errcode: 0,

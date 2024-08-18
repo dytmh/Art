@@ -42,10 +42,12 @@ class TeacherPhotoModel extends Model {
         TeacherPhotoModel.sync({alter: true}).catch(() => {})
     }
 
-    static async getTeacherPhotoList() {
+    static async getTeacherPhotoList(page: number, count: number) {
         try {
             const data = await TeacherPhotoModel.findAll({
                 order:  [['createtime', 'DESC']],
+                limit: count,
+                offset: page * count,
                 raw: true
             })
             return data
