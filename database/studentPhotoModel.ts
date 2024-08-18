@@ -18,7 +18,7 @@ class StudentPhotoModel extends Model {
                 type: DataTypes.STRING,
                 allowNull: true
             },
-            url: {
+            info: {
                 type: DataTypes.STRING,
                 allowNull: true
             },
@@ -37,9 +37,75 @@ class StudentPhotoModel extends Model {
             modelName: 't_student_photos',
             createdAt: 'createtime',
             updatedAt: 'updatetime',
-            indexes: [{ name: 'index', unique: false, fields: ['name', 'createtime', 'updatetime', 'student_id'] }]
+            indexes: [{ name: 'index', unique: false, fields: ['name', 'createtime', 'updatetime'] }]
         });
         StudentPhotoModel.sync({alter: true}).catch(() => {})
+    }
+
+    static async getStudentPhotoList() {
+        try {
+            const data = await StudentPhotoModel.findAll({
+                order:  [['createtime', 'DESC']],
+                raw: true
+            })
+            return data
+        }
+        catch(e) {
+            console.log(e)
+        }
+        return null
+    }
+
+    static async addStudentPhoto(name: string, desc: string, info: string) {
+        try {
+            const data = await StudentPhotoModel.create({
+                name: name,
+                desc: desc,
+                info: info
+            })
+            return data?.dataValues
+        }
+        catch(e) {
+            console.log(e)
+        }
+        return null
+    }
+
+    static async updateStudentPhoto(school_id: string, name: string, desc: string, info: string) {
+        try {
+            const data = await StudentPhotoModel.findOne({
+                where: { school_id: school_id }
+            })
+            if (data) {
+                data.set({
+                    name: name,
+                    address: desc,
+                    info: info
+                });
+                const res = await data.save()
+                return res?.dataValues
+            }
+        }
+        catch(e) {
+            console.log(e)
+        }
+        return null
+    }
+
+    static async deleteStudentPhoto(school_id: string) {
+        try {
+            const data = await StudentPhotoModel.findOne({
+                where: { school_id: school_id }
+            })
+            if (data) {
+                await data.destroy()
+                return true
+            }
+        }
+        catch(e) {
+            console.log(e)
+        }
+        return false
     }
 }
 
