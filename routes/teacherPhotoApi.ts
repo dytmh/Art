@@ -25,6 +25,22 @@ namespace teacherPhotoApi
         }
     }
 
+    export const getTeacherPhoto: HandleHttpApi = async (req, res) => {
+        const data = await TeacherPhotoModel.getTeacherPhoto(req.body['id'])
+        if (defined(data)) {
+            res.send({
+                errcode: 0,
+                errmsg: '',
+                data: data
+            })
+        } else {
+            res.send({
+                errcode: 1,
+                errmsg: '获取失败',
+            })
+        }
+    }
+
     export const addTeacherPhoto: HandleHttpApi = async (req, res) => {
         const data = await TeacherPhotoModel.addTeacherPhoto(req.body['name'], req.body['desc'], req.body['info'])
         if (defined(data)) {

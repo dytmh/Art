@@ -25,6 +25,22 @@ namespace studentPhotoApi
         }
     }
 
+    export const getStudentPhoto: HandleHttpApi = async (req, res) => {
+        const data = await StudentPhotoModel.getStudentPhoto(req.body['id'])
+        if (defined(data)) {
+            res.send({
+                errcode: 0,
+                errmsg: '',
+                data: data
+            })
+        } else {
+            res.send({
+                errcode: 1,
+                errmsg: '获取失败',
+            })
+        }
+    }
+
     export const addStudentPhoto: HandleHttpApi = async (req, res) => {
         const data = await StudentPhotoModel.addStudentPhoto(req.body['name'], req.body['desc'], req.body['info'])
         if (defined(data)) {

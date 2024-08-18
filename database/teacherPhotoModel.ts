@@ -58,6 +58,20 @@ class TeacherPhotoModel extends Model {
         return null
     }
 
+    static async getTeacherPhoto(id: string) {
+        try {
+            const data = await TeacherPhotoModel.findOne({
+                where: { id },
+                raw: true
+            })
+            return data
+        }
+        catch(e) {
+            console.log(e)
+        }
+        return null
+    }
+
     static async addTeacherPhoto(name: string, desc: string, info: string) {
         try {
             const data = await TeacherPhotoModel.create({
