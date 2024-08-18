@@ -19,13 +19,15 @@ router.post('/api/school/updateSchool', schoolApi.updateSchool)
 router.post('/api/school/deleteSchool', schoolApi.deleteSchool)
 
 router.post('/api/teacher/getTeacherPhotoList', teacherPhotoApi.getTeacherPhotoList)
+router.post('/api/teacher/getTeacherPhoto', teacherPhotoApi.getTeacherPhoto)
 router.post('/api/teacher/addTeacherPhoto', teacherPhotoApi.addTeacherPhoto)
 router.post('/api/teacher/updateTeacherPhoto', teacherPhotoApi.updateTeacherPhoto)
 router.post('/api/teacher/deleteTeacherPhoto', teacherPhotoApi.deleteTeacherPhoto)
 
-router.post('/api/student/getSchoolList', studentPhotoApi.getStudentPhotoList)
-router.post('/api/student/addSchool', studentPhotoApi.addStudentPhoto)
-router.post('/api/student/updateSchool', studentPhotoApi.updateStudentPhoto)
-router.post('/api/student/deleteSchool', studentPhotoApi.deleteStudentPhoto)
+router.post('/api/student/getStudentPhotoList', studentPhotoApi.getStudentPhotoList)
+router.post('/api/student/getStudentPhoto', studentPhotoApi.getStudentPhoto)
+router.post('/api/student/addStudentPhoto', studentPhotoApi.addStudentPhoto)
+router.post('/api/student/updateStudentPhoto', studentPhotoApi.updateStudentPhoto)
+router.post('/api/student/deleteStudentPhoto', studentPhotoApi.deleteStudentPhoto)
 
 export default router
