@@ -55,7 +55,7 @@ class SchoolModel extends Model {
                 order:  [['sort', 'DESC'], ['createtime', 'DESC']],
                 raw: true
             })
-            return data
+            return data ?? []
         }
         catch(e) {
             console.log(e)

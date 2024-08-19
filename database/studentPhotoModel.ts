@@ -50,7 +50,7 @@ class StudentPhotoModel extends Model {
                 offset: page * count,
                 raw: true
             })
-            return data
+            return data ?? []
         }
         catch(e) {
             console.log(e)

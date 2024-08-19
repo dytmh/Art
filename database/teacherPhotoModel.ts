@@ -64,7 +64,7 @@ class TeacherPhotoModel extends Model {
                 where: { id },
                 raw: true
             })
-            return data
+            return data ?? []
         }
         catch(e) {
             console.log(e)
