@@ -88,10 +88,10 @@ class StudentPhotoModel extends Model {
         return null
     }
 
-    static async updateStudentPhoto(school_id: string, name: string, desc: string, info: string) {
+    static async updateStudentPhoto(id: string, name: string, desc: string, info: string) {
         try {
             const data = await StudentPhotoModel.findOne({
-                where: { school_id: school_id }
+                where: { id: id }
             })
             if (data) {
                 data.set({
@@ -109,10 +109,10 @@ class StudentPhotoModel extends Model {
         return null
     }
 
-    static async deleteStudentPhoto(school_id: string) {
+    static async deleteStudentPhoto(id: string) {
         try {
             const data = await StudentPhotoModel.findOne({
-                where: { school_id: school_id }
+                where: { id: id }
             })
             if (data) {
                 await data.destroy()
