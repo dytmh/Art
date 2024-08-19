@@ -4,6 +4,7 @@ import userApi from '../routes/userApi'
 import schoolApi from '../routes/schoolApi'
 import teacherPhotoApi from '../routes/teacherPhotoApi'
 import studentPhotoApi from '../routes/studentPhotoApi'
+import messageApi from '../routes/messageApi'
 
 const router = express.Router()
 
@@ -29,5 +30,11 @@ router.post('/api/student/getStudentPhoto', studentPhotoApi.getStudentPhoto)
 router.post('/api/student/addStudentPhoto', studentPhotoApi.addStudentPhoto)
 router.post('/api/student/updateStudentPhoto', studentPhotoApi.updateStudentPhoto)
 router.post('/api/student/deleteStudentPhoto', studentPhotoApi.deleteStudentPhoto)
+
+router.post('/api/message/getMessageList', messageApi.getMessageList)
+router.post('/api/message/getMessage', messageApi.getMessage)
+router.post('/api/message/addMessage', messageApi.addMessage)
+router.post('/api/message/updateMessage', messageApi.updateMessage)
+router.post('/api/message/deleteMessage', messageApi.deleteMessage)
 
 export default router
