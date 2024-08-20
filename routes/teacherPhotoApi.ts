@@ -1,4 +1,5 @@
 import GlobalConfig from '../config/config';
+import TeacherLikeModel from '../database/teacherLikeModel';
 import TeacherPhotoModel from '../database/teacherPhotoModel';
 import { defined, isNullOrEmpty } from '../utility';
 import type { HandleHttpApi } from './interface'
@@ -85,6 +86,40 @@ namespace teacherPhotoApi
             res.send({
                 errcode: 1,
                 errmsg: '删除失败',
+            })
+        }
+    }
+
+    export const getTeacherLike: HandleHttpApi = async (req, res) => {
+        const data = await TeacherLikeModel.getTeacherLike(req.body['id'])
+        if (defined(data)) {
+            res.send({
+                errcode: 0,
+                errmsg: '',
+                data: data
+            })
+        } else {
+            res.send({
+                errcode: 1,
+                errmsg: '获取失败',
+                data: 0
+            })
+        }
+    }
+
+    export const updateTeacherLike: HandleHttpApi = async (req, res) => {
+        const data = await TeacherLikeModel.updateTeacherLike(req.body['id'], req.body['userid'], Number.parseInt(req.body['up']))
+        if (defined(data)) {
+            res.send({
+                errcode: 0,
+                errmsg: '',
+                data: data
+            })
+        } else {
+            res.send({
+                errcode: 1,
+                errmsg: '设置失败',
+                data: 0
             })
         }
     }

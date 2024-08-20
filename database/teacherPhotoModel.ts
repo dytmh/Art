@@ -45,6 +45,18 @@ class TeacherPhotoModel extends Model {
     static async getTeacherPhotoList(page: number, count: number) {
         try {
             const data = await TeacherPhotoModel.findAll({
+                attributes: {
+                    include: [
+                        [
+                            ModelSequelize.getSequelize().literal(`(
+                                SELECT COUNT(*)
+                                FROM t_teacher_likes
+                                WHERE t_teacher_likes.photoid = t_teacher_photos.id
+                            )`),
+                            'likenum'
+                        ]
+                    ]
+                },
                 order:  [['createtime', 'DESC']],
                 limit: count,
                 offset: page * count,

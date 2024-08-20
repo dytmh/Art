@@ -24,17 +24,22 @@ router.post('/api/teacher/getTeacherPhoto', teacherPhotoApi.getTeacherPhoto)
 router.post('/api/teacher/addTeacherPhoto', teacherPhotoApi.addTeacherPhoto)
 router.post('/api/teacher/updateTeacherPhoto', teacherPhotoApi.updateTeacherPhoto)
 router.post('/api/teacher/deleteTeacherPhoto', teacherPhotoApi.deleteTeacherPhoto)
+router.post('/api/teacher/getTeacherLike', teacherPhotoApi.getTeacherLike)
+router.post('/api/teacher/updateTeacherLike', teacherPhotoApi.updateTeacherLike)
 
 router.post('/api/student/getStudentPhotoList', studentPhotoApi.getStudentPhotoList)
 router.post('/api/student/getStudentPhoto', studentPhotoApi.getStudentPhoto)
 router.post('/api/student/addStudentPhoto', studentPhotoApi.addStudentPhoto)
 router.post('/api/student/updateStudentPhoto', studentPhotoApi.updateStudentPhoto)
 router.post('/api/student/deleteStudentPhoto', studentPhotoApi.deleteStudentPhoto)
+router.post('/api/student/getStudentLike', studentPhotoApi.getStudentLike)
+router.post('/api/student/updateStudentLike', studentPhotoApi.updateStudentLike)
 
 router.post('/api/message/getMessageList', messageApi.getMessageList)
 router.post('/api/message/getMessage', messageApi.getMessage)
 router.post('/api/message/addMessage', messageApi.addMessage)
 router.post('/api/message/updateMessage', messageApi.updateMessage)
 router.post('/api/message/deleteMessage', messageApi.deleteMessage)
+
 
 export default router
