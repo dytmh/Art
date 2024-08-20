@@ -9,7 +9,7 @@ import CryptoJS from 'crypto-js'
 namespace teacherPhotoApi
 {
     export const getTeacherPhotoList: HandleHttpApi = async (req, res) => {
-        const data = await TeacherPhotoModel.getTeacherPhotoList(req.body['page'], req.body['count'])
+        const data = await TeacherPhotoModel.getTeacherPhotoList(req.body['page'], req.body['count'], req.headers['x-wx-openid'] as string ?? '')
         if (defined(data)) {
             const total = await TeacherPhotoModel.count()
             res.send({
