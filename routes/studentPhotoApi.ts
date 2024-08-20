@@ -108,7 +108,7 @@ namespace studentPhotoApi
     }
 
     export const updateStudentLike: HandleHttpApi = async (req, res) => {
-        const data = await StudentLikeModel.updateStudentLike(req.body['id'], req.body['userid'], Number.parseInt(req.body['up']))
+        const data = await StudentLikeModel.updateStudentLike(req.body['id'], req.headers['x-wx-openid'] as string, req.body['up'])
         if (defined(data)) {
             res.send({
                 errcode: 0,
