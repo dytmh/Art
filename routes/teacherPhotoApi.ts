@@ -27,7 +27,7 @@ namespace teacherPhotoApi
     }
 
     export const getTeacherPhoto: HandleHttpApi = async (req, res) => {
-        const data = await TeacherPhotoModel.getTeacherPhoto(req.body['id'])
+        const data = await TeacherPhotoModel.getTeacherPhoto(req.body['id'], req.headers['x-wx-openid'] as string ?? '')
         if (defined(data)) {
             res.send({
                 errcode: 0,

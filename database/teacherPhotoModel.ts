@@ -78,9 +78,29 @@ class TeacherPhotoModel extends Model {
         return null
     }
 
-    static async getTeacherPhoto(id: string) {
+    static async getTeacherPhoto(id: string, userid: string) {
         try {
             const data = await TeacherPhotoModel.findOne({
+                attributes: {
+                    include: [
+                        [
+                            ModelSequelize.getSequelize().literal(`(
+                                SELECT COUNT(*)
+                                FROM t_teacher_likes
+                                WHERE t_teacher_likes.photoid = t_teacher_photos.id
+                            )`),
+                            'likenum'
+                        ],
+                        [
+                            ModelSequelize.getSequelize().literal(`(
+                                SELECT COUNT(*)
+                                FROM t_teacher_likes
+                                WHERE t_teacher_likes.photoid = t_teacher_photos.id AND t_teacher_likes.userid = '${userid}' LIMIT 1
+                            )`),
+                            'mylike'
+                        ]
+                    ]
+                },
                 where: { id },
                 raw: true
             })

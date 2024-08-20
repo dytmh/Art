@@ -27,7 +27,7 @@ namespace studentPhotoApi
     }
 
     export const getStudentPhoto: HandleHttpApi = async (req, res) => {
-        const data = await StudentPhotoModel.getStudentPhoto(req.body['id'])
+        const data = await StudentPhotoModel.getStudentPhoto(req.body['id'], req.headers['x-wx-openid'] as string ?? '')
         if (defined(data)) {
             res.send({
                 errcode: 0,
