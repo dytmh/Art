@@ -113,13 +113,15 @@ namespace studentPhotoApi
             res.send({
                 errcode: 0,
                 errmsg: '',
-                data: data
+                data: {
+                    mylike: req.body['up'],
+                    likenum: data
+                }
             })
         } else {
             res.send({
                 errcode: 1,
-                errmsg: '设置失败',
-                data: 0
+                errmsg: '设置失败'
             })
         }
     }

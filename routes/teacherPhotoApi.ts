@@ -113,7 +113,10 @@ namespace teacherPhotoApi
             res.send({
                 errcode: 0,
                 errmsg: '',
-                data: data
+                data: {
+                    mylike: req.body['up'],
+                    likenum: data
+                }
             })
         } else {
             res.send({
