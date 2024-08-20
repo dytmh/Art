@@ -59,7 +59,7 @@ class StudentPhotoModel extends Model {
                             ModelSequelize.getSequelize().literal(`(
                                 SELECT COUNT(*)
                                 FROM t_student_likes
-                                WHERE t_student_likes.photoid = t_student_photos.id AND t_student_likes.userid = ${userid} LIMIT 1
+                                WHERE t_student_likes.photoid = t_student_photos.id AND t_student_likes.userid = '${userid}' LIMIT 1
                             )`),
                             'mylike'
                         ]
