@@ -99,10 +99,10 @@ class MessageModel extends Model {
         return null
     }
 
-    static async updateMessage(school_id: string, name: string, desc: string, info: string, notice: number = 0) {
+    static async updateMessage(id: string, name: string, desc: string, info: string, notice: number = 0) {
         try {
             const data = await MessageModel.findOne({
-                where: { school_id: school_id }
+                where: { id: id }
             })
             if (data) {
                 data.set({
@@ -121,10 +121,10 @@ class MessageModel extends Model {
         return null
     }
 
-    static async deleteMessage(school_id: string) {
+    static async deleteMessage(id: string) {
         try {
             const data = await MessageModel.findOne({
-                where: { school_id: school_id }
+                where: { id: id }
             })
             if (data) {
                 await data.destroy()
