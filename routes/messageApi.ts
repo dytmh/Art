@@ -8,7 +8,7 @@ import CryptoJS from 'crypto-js'
 namespace messageApi
 {
     export const getMessageList: HandleHttpApi = async (req, res) => {
-        const data = await MessageModel.getMessageList(req.body['page'], req.body['count'])
+        const data = await MessageModel.getMessageList(req.body['page'], req.body['count'], req.body['notice'] ?? 0)
         if (defined(data)) {
             const total = await MessageModel.count()
             res.send({
@@ -42,7 +42,7 @@ namespace messageApi
     }
 
     export const addMessage: HandleHttpApi = async (req, res) => {
-        const data = await MessageModel.addMessage(req.body['name'], req.body['desc'], req.body['info'])
+        const data = await MessageModel.addMessage(req.body['name'], req.body['desc'], req.body['info'], req.body['notice'] ?? 0)
         if (defined(data)) {
             res.send({
                 errcode: 0,
@@ -58,7 +58,7 @@ namespace messageApi
     }
 
     export const updateMessage: HandleHttpApi = async (req, res) => {
-        const data = await MessageModel.updateMessage(req.body['id'], req.body['name'], req.body['desc'], req.body['info'])
+        const data = await MessageModel.updateMessage(req.body['id'], req.body['name'], req.body['desc'], req.body['info'], req.body['notice'] ?? 0)
         if (defined(data)) {
             res.send({
                 errcode: 0,

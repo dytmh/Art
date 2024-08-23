@@ -1,4 +1,4 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model, Op } from "sequelize";
 import ModelSequelize from "./modelSequelize";
 
 
@@ -22,6 +22,11 @@ class MessageModel extends Model {
                 type: DataTypes.STRING,
                 allowNull: true
             },
+            notice: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0
+            },
             createtime: {
                 type: DataTypes.DATE,
                 defaultValue: DataTypes.NOW,
@@ -42,9 +47,14 @@ class MessageModel extends Model {
         MessageModel.sync({alter: true}).catch(() => {})
     }
 
-    static async getMessageList(page: number, count: number) {
+    static async getMessageList(page: number, count: number, notice: number = 0) {
         try {
             const data = await MessageModel.findAll({
+                where: {
+                    notice: {
+                        [Op.gte]: notice
+                      }
+                },
                 order:  [['createtime', 'DESC']],
                 limit: count,
                 offset: page * count,
@@ -73,12 +83,13 @@ class MessageModel extends Model {
     }
 
 
-    static async addMessage(name: string, desc: string, info: string) {
+    static async addMessage(name: string, desc: string, info: string, notice: number = 0) {
         try {
             const data = await MessageModel.create({
                 name: name,
                 desc: desc,
-                info: info
+                info: info,
+                notice: notice
             })
             return data?.dataValues
         }
@@ -88,7 +99,7 @@ class MessageModel extends Model {
         return null
     }
 
-    static async updateMessage(school_id: string, name: string, desc: string, info: string) {
+    static async updateMessage(school_id: string, name: string, desc: string, info: string, notice: number = 0) {
         try {
             const data = await MessageModel.findOne({
                 where: { school_id: school_id }
@@ -97,7 +108,8 @@ class MessageModel extends Model {
                 data.set({
                     name: name,
                     address: desc,
-                    info: info
+                    info: info,
+                    notice: notice
                 });
                 const res = await data.save()
                 return res?.dataValues
