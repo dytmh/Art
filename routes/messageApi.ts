@@ -88,6 +88,10 @@ namespace messageApi
             })
         }
     }
+
+    export const subscribeMessage: HandleHttpApi = async (req, res) => {
+        
+    }
 }
 
 export default messageApi

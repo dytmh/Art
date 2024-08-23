@@ -41,5 +41,7 @@ router.post('/api/message/addMessage', messageApi.addMessage)
 router.post('/api/message/updateMessage', messageApi.updateMessage)
 router.post('/api/message/deleteMessage', messageApi.deleteMessage)
 
+router.post('/api/message/subscribeMessage', messageApi.subscribeMessage)
+router.get('/api/message/subscribeMessage', messageApi.subscribeMessage)
 
 export default router
